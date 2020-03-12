@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { RepositoryFactory } from '../repositorys/RepositoryFactory'
+const PokemonRepository = RepositoryFactory.get('pokemon')
   export default {
     name: 'pokedex',
 
@@ -20,13 +22,9 @@
       pokemon: null,
     }),
     methods:{
-      get_pokemon(){
-        fetch(`https://pokeapi.co/api/v2/pokemon/${this.pokemon_id}/`)
-          .then(response => response.json())
-          .then(data => {
-            console.log(data);
-            this.pokemon = data;
-          })
+      async get_pokemon(){
+        const { data } = await PokemonRepository.get_pokemon(this.pokemon_id)
+        this.pokemon = data;
       }
     },
     mounted(){
