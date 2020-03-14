@@ -7,5 +7,8 @@ export default {
     },
     get_species(id){
         return Repository.get(`${resource}-species/${id}`);
+    },
+    get_pokemon_by_name(name){
+        return Repository.get(`${resource}/${name}`)
     }
 }

@@ -1,12 +1,21 @@
 <template>
   <v-container class="text-center justify-center">
-    <v-card min-width="200" max-width="600" v-if="pokemon != null">
-      <v-btn v-if="pokemon_id != 1" color="primary" @click="pokemon_id = pokemon_id - 1; get_pokemon()">-</v-btn>
+    <v-row>
+      <v-col>
+        <v-text-field @keyup.enter="search_pokemon()" label="Search..." v-model="search" clearable></v-text-field>
+        
+      </v-col>
+      
+    </v-row>
+    
+    <v-card dark v-if="pokemon != null">
+      
       <v-list-item-content>
               <v-list-item-title class="title">{{pokemon.name}}</v-list-item-title>
               <v-list-item-subtitle>Pokedex ID: {{pokemon.id}}</v-list-item-subtitle>
       </v-list-item-content>
-      <v-avatar size="133">
+      <v-btn v-if="pokemon_id != 1" color="primary" @click="pokemon_id = pokemon_id - 1; get_pokemon()">-</v-btn>
+      <v-avatar size="400">
         <img v-bind:src="pokemon.sprites.front_default">
       </v-avatar>
       <v-btn color="primary"  @click="pokemon_id = pokemon_id + 1; get_pokemon()">+</v-btn>
@@ -25,6 +34,8 @@ const PokemonRepository = RepositoryFactory.get('pokemon')
       pokemon_id: 1,
       pokemon: null,
       species: null,
+      search: '',
+      
     }),
     methods:{
       async get_pokemon(){
@@ -34,6 +45,11 @@ const PokemonRepository = RepositoryFactory.get('pokemon')
       async get_species(){
         const { data } = await PokemonRepository.get_species(this.pokemon_id)
         this.species = data;
+      },
+      async search_pokemon(){
+        const { data } = await PokemonRepository.get_pokemon_by_name(this.search.toLowerCase())
+        this.pokemon_id = data.id;
+        this.pokemon = data;
       }
     },
     mounted(){

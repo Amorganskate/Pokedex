@@ -1,17 +1,24 @@
 <template>
-  <v-app>
-    <Pokedex/>
+  <v-app dark>
+    <v-navigation-drawer dark app>
+
+    </v-navigation-drawer>
+    <v-bar-app dark app>
+    </v-bar-app>
+    <v-content dark>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
+    </v-content>
+    
   </v-app>
 </template>
 
 <script>
-import Pokedex from '@/components/pokedex.vue'
 export default {
   name: 'App',
 
-  components: {
-    Pokedex
-  },
+  
 
   data: () => ({
     //
