@@ -14,11 +14,11 @@
               <v-list-item-title class="title">{{pokemon.name}}</v-list-item-title>
               <v-list-item-subtitle>Pokedex ID: {{pokemon.id}}</v-list-item-subtitle>
       </v-list-item-content>
-      <v-btn v-if="pokemon_id != 1" color="primary" @click="pokemon_id = pokemon_id - 1; get_pokemon()">-</v-btn>
+      <a class="text_arrows" v-if="pokemon_id != 1" color="white" @click="pokemon_id = pokemon_id - 1; get_pokemon()">&#8592;</a>
       <v-avatar size="400">
         <img v-bind:src="pokemon.sprites.front_default">
       </v-avatar>
-      <v-btn color="primary"  @click="pokemon_id = pokemon_id + 1; get_pokemon()">+</v-btn>
+      <a class="text_arrows" color="white"  @click="pokemon_id = pokemon_id + 1; get_pokemon()">&rarr;</a>
     </v-card>
     
   </v-container>
@@ -58,3 +58,10 @@ const PokemonRepository = RepositoryFactory.get('pokemon')
     }
   }
 </script>
+
+<style  scoped>
+.text_arrows{
+  font-size:50px;
+  color:white;
+}
+</style>
