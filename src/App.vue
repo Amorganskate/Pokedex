@@ -1,11 +1,13 @@
 <template>
-  <v-app dark>
-    <v-navigation-drawer dark app>
+  <v-app>
+    <v-navigation-drawer app>
 
     </v-navigation-drawer>
-    <v-bar-app dark app>
+    <v-bar-app app>
+      
     </v-bar-app>
-    <v-content dark>
+    <v-content>
+      <search class="ma-3"></search>
       <v-container fluid>
         <router-view></router-view>
       </v-container>
@@ -15,13 +17,20 @@
 </template>
 
 <script>
+import search from '@/components/pokemon_search'
 export default {
   name: 'App',
+  components:{
+    search
+  },
 
   
 
   data: () => ({
-    //
+    
   }),
+  methods:{
+    
+  }
 };
 </script>

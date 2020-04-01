@@ -1,14 +1,7 @@
 <template>
   <v-container class="text-center justify-center">
-    <v-row>
-      <v-col>
-        <v-text-field @keyup.enter="search_pokemon()" label="Search..." v-model="search" clearable></v-text-field>
-        
-      </v-col>
-      
-    </v-row>
     
-    <v-card dark v-if="pokemon != null">
+    <v-card v-if="pokemon != null">
       
       <v-list-item-content>
               <v-list-item-title class="title">{{pokemon.name}}</v-list-item-title>
@@ -25,7 +18,7 @@
 </template>
 
 <script>
-import { RepositoryFactory } from '../repositorys/RepositoryFactory'
+import { RepositoryFactory } from '@/repositorys/RepositoryFactory'
 const PokemonRepository = RepositoryFactory.get('pokemon')
   export default {
     name: 'pokedex',
@@ -46,11 +39,7 @@ const PokemonRepository = RepositoryFactory.get('pokemon')
         const { data } = await PokemonRepository.get_species(this.pokemon_id)
         this.species = data;
       },
-      async search_pokemon(){
-        const { data } = await PokemonRepository.get_pokemon_by_name(this.search.toLowerCase())
-        this.pokemon_id = data.id;
-        this.pokemon = data;
-      }
+      
     },
     mounted(){
       this.get_pokemon();
