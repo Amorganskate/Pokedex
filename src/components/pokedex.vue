@@ -21,6 +21,7 @@
 import { RepositoryFactory } from '@/repositorys/RepositoryFactory'
 const PokemonRepository = RepositoryFactory.get('pokemon')
   export default {
+    props: ["new_pokemon"],
     name: 'pokedex',
 
     data: () => ({
@@ -30,6 +31,11 @@ const PokemonRepository = RepositoryFactory.get('pokemon')
       search: '',
       
     }),
+    watch:{
+        pokemon(){
+          this.pokemon = this.new_pokemon;
+        }
+    },
     methods:{
       async get_pokemon(){
         const { data } = await PokemonRepository.get_pokemon(this.pokemon_id)
@@ -44,6 +50,7 @@ const PokemonRepository = RepositoryFactory.get('pokemon')
     mounted(){
       this.get_pokemon();
       this.get_species();
+      console.log(this.pokemon);
     }
   }
 </script>

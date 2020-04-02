@@ -7,9 +7,11 @@
       
     </v-bar-app>
     <v-content>
-      <search class="ma-3"></search>
+      <v-toolbar>
+        <search :change_pokedex_pokemon="change_pokedex_pokemon"></search>
+      </v-toolbar>
       <v-container fluid>
-        <router-view></router-view>
+        <router-view :new_pokemon="pokemon"></router-view>
       </v-container>
     </v-content>
     
@@ -23,14 +25,13 @@ export default {
   components:{
     search
   },
-
-  
-
   data: () => ({
-    
+    pokemon: '',
   }),
   methods:{
-    
+    change_pokedex_pokemon(pokemon){
+      this.pokemon = pokemon;
+    }
   }
 };
 </script>
