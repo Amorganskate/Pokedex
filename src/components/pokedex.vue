@@ -33,7 +33,7 @@ const PokemonRepository = RepositoryFactory.get('pokemon')
     }),
     watch:{
         pokemon(){
-          this.pokemon = this.new_pokemon;
+          this.pokemon = (this.new_pokemon != undefined) ? this.new_pokemon : this.pokemon;
         }
     },
     methods:{
